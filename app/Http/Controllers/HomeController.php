@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Hero;
 use App\Models\Skill;
+use App\Models\Search;
 
 class HomeController extends Controller
 {

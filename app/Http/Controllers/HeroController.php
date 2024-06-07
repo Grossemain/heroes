@@ -10,8 +10,16 @@ use Illuminate\Support\Facades\Auth;
 class HeroController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Create a new controller instance.
+     *
+     * @return void
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     public function index()
     {
         $heros = Hero::all();

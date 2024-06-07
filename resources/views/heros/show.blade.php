@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.navadmin')
 @section('content')
 <div class="row">
     <div class="col-lg-10 mx-auto">

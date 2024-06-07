@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.navadmin')
 @section('content')
 <div class="container py-5">
     <div class="row">

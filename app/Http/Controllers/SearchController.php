@@ -3,36 +3,36 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Skill;
+use App\Models\Search;
+use App\Models\Hero;
 
-class SkillController extends Controller
+class SearchController extends Controller
 {
-        /**
-     * Create a new controller instance.
-     *
-     * @return void
+       /**
+     * Afficher le formulaire de recherche et les résultats.
      */
-    public function __construct()
+    public function index(Request $request)
     {
-        $this->middleware('auth');
+        
+        $query = $request->input('query');
+        $searches = [];
+
+        if ($query) {
+            $searches = Search::where('heroes.pokemon', 'LIKE', "%$query%")->get();
+           //->orWhere('heroes.region', 'like', "%$query%")
+        }
+
+        return view('searches.index', compact('searches', 'query'));
     }
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        $skills = Skill::all();
-        return view('skills.index', compact('skills'));
-    }
+
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        $skills = Skill::all();
-
-        return view('skills.create', compact('skills'));
+        //
     }
 
     /**
@@ -40,16 +40,7 @@ class SkillController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'skill_name' => 'required',
-            ]);
-
-        Skill::create([
-            'skill_name'=>$request->skill_name,
-        ]);
-
-        return redirect()->route('skills.index')
-        ->with('success', 'Le skill a été ajouté avec succès !');
+        //
     }
 
     /**
@@ -57,7 +48,8 @@ class SkillController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $searches = Search::findOrfail($id);
+        return view('search.show', compact('search'));
     }
 
     /**

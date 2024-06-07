@@ -9,17 +9,24 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+        /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $users = User::all();
+        //dd($users);
+        return view('users.index', compact('users'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
@@ -30,7 +37,20 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'pseudo' => 'required',
+            'email'=>'email',
+            'password'=>'password',
+            ]);
+
+        User::create([
+            'pseudo'=>$request->name,
+            'email'=>$request->email,
+            'password'=>$request->password,
+        ]);
+
+        return redirect()->route('users.index')
+        ->with('success', 'L\utilisateur a été ajouté avec succès !');
     }
 
     /**
@@ -46,7 +66,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('user.edit', compact('user'));
+        return view('users.edit', compact('user'));
     }
 
     /**
@@ -72,9 +92,10 @@ class UserController extends Controller
         // (les id doivent être identiques)
         if (Auth::user()->id == $user->id) {
             $user->delete();
-            return redirect()->route('home')->with('message', 'Le compte a bien été supprimé');
+            return redirect()->route('/users')->with('message', 'Le compte a bien été supprimé');
         } else {
             return redirect()->back()->withErrors(['erreur' => 'Suppression du compte impossible']);
         }
+
     }
 }
