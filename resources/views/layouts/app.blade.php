@@ -38,6 +38,15 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('home') }}">{{ __('home') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('heros.index') }}">{{ __('heros') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('skills.index') }}">{{ __('skills') }}</a>
+                        </li>
                         <!-- Authentication Links -->
                         @guest
                         @if (Route::has('login'))
@@ -80,19 +89,19 @@
             <div class="container-fluid text-center ">
 
                 @if (session()->has('message'))
-                    <p class="alert alert-success">{{ session()->get('message') }}</p>
+                <p class="alert alert-success">{{ session()->get('message') }}</p>
                 @endif
-    
+
                 @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
                 @endif
-    
+
             </div>
             @yield('content')
         </main>

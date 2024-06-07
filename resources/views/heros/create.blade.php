@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.app')
 @section('content')
 <div class="container py-5">
     <div class="row">
@@ -17,11 +17,15 @@
                         </div>
                         @endif
                         <!-- Formulaire -->
-                        <form method="POST" action="{{ route('heros.store') }}">
+                        <form method="POST" action="{{ route('heros.store') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label>Nom pokemon</label>
                                 <input type="text" name="pokemon" class="form-control">
+                            </div>
+                            <div class="form-group col-sm-12">
+                                <label for="image" class="form-label">Image du pokemon</label>
+                                <input type="file" class="form-control" name="image" id="image">
                             </div>
                             <div class="form-group">
                                 <label>Type</label>
@@ -55,14 +59,14 @@
                                 <label>region</label>
                                 <input type="text" name="region" class="form-control">
                             </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary rounded-pill shadow-sm mt-4">
-                                Ajouter un Pokemon </button>
-                        </form>
-                        <!-- Fin du formulaire -->
                     </div>
+                    <button type="submit" class="btn btn-primary rounded-pill shadow-sm mt-4">
+                        Ajouter un Pokemon </button>
+                    </form>
+                    <!-- Fin du formulaire -->
                 </div>
             </div>
         </div>
     </div>
-    @endsection
+</div>
+@endsection

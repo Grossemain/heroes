@@ -30,19 +30,17 @@
                             {{session()->get('success') }}
                         </div><br />
                         @endif
-                        <div class="row row-cols-1 row-cols-md-2 g-4">
+                        <div class="row row-cols-1 row-cols-md-2 g-4 text-center">
                             @foreach($heros as $hero)
                             <div class="col">
                                 <div class="card">
+                                    @if($hero->image)
+                                        <img src="/storage/image/{{$hero->image}}" alt="{{$hero->pokemon}}" width="max">
+                                    @endif
                                     <div class="card-body">
-                                        <h2 class="card-title">Nom : {{$hero->pokemon}}</h2>
-                                        <p class="card-text">type2 : {{$hero->type2}}</p>
-                                        <p class="card-text">sous_evolution : {{$hero->sous_evolution}}</p>
-                                        <p class="card-text">evolution : {{$hero->evolution}}</p>
-                                        <p class="card-text">mega_evolution : {{$hero->mega_evolution}}</p>
-                                        <p class="card-text">forme_normale : {{$hero->forme_normale}}</p>
-                                        <p class="card-text">generation : {{$hero->generation}}</p>
-                                        <p class="card-text">region : {{$hero->region}}</p>
+                                        <h2 class="card-title">{{$hero->pokemon}}</h2>
+                                        <p class="card-text">type : {{$hero->type}}</p>
+                                        <a href="{{ route('heros.show', $hero->id)}}" class="btn btn-primary btn-sm">fiche {{$hero->pokemon}}</a>
                                     </div>
                                 </div>
                             </div>

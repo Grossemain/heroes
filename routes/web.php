@@ -13,8 +13,9 @@ Route::get('/', function () {
 });
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::resource('heros', HeroController::class);
+Route::get('/heros', [HeroController::class, 'index'])->name('heros');
 Route::resource('users', UserController::class)->except('index','create','store');
+Route::resource('heros', HeroController::class);
 Route::resource('skills', SkillController::class);
 Auth::routes();
 

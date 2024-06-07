@@ -22,6 +22,7 @@ class Hero extends Model
         'generation',
         'region',
         'skill_id',
+        'image',
     ];
 
     public function skill()
